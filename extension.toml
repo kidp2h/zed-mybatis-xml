@@ -14,7 +14,7 @@ path = "xml"
 # Grammar lives in this repository; bump commit after changing it
 [grammars.mybatis_sql]
 repository = "https://github.com/kidp2h/zed-mybatis-xml"
-commit = "ebaaac776a2e28c2b32ceac1da7fdc7557388e86"
+commit = "3e5ec320f20500f8877e6376a75c60730f9cb94b"
 path = "tree-sitter-mybatis-sql"
 
 # Upstream: https://github.com/eclipse-lemminx/lemminx
