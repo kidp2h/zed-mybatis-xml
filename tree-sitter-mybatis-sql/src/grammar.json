@@ -1,0 +1,268 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
+  "name": "mybatis_sql",
+  "rules": {
+    "source": {
+      "type": "REPEAT",
+      "content": {
+        "type": "SYMBOL",
+        "name": "_token"
+      }
+    },
+    "_token": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "comment"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "parameter"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "string"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "quoted_identifier"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "number"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "keyword"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "type"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "constant"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "operator"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "punctuation"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "other"
+        }
+      ]
+    },
+    "comment": {
+      "type": "TOKEN",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "--[^\\n]*"
+          },
+          {
+            "type": "PATTERN",
+            "value": "\\/\\*[^*]*\\*+([^/*][^*]*\\*+)*\\/"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[#$]\\{[^}]*\\}"
+      }
+    },
+    "string": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[eE]?'([^'\\n]|'')*'"
+      }
+    },
+    "quoted_identifier": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "\"[^\"]*\""
+      }
+    },
+    "number": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "\\d+(\\.\\d+)?"
+      }
+    },
+    "keyword": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "(select|from|where|and|or|not|in|is|as|on|join|left|right|inner|outer|full|cross|natural|lateral|group|by|order|having|limit|offset|fetch|first|next|rows|row|only|distinct|all|any|some|exists|between|like|ilike|similar|escape|case|when|then|else|end|union|intersect|except|insert|into|values|update|set|delete|returning|with|recursive|over|partition|window|asc|desc|nulls|last|using|conflict|do|nothing|interval|filter|within|cast|default|excluded|array|range|current|unbounded|preceding|following|ties)",
+        "flags": "i"
+      }
+    },
+    "type": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "(integer|int|int2|int4|int8|smallint|bigint|numeric|decimal|real|float|double|serial|bigserial|boolean|bool|varchar|char|character|text|date|timestamp|timestamptz|json|jsonb|uuid)",
+        "flags": "i"
+      }
+    },
+    "constant": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "(true|false|null|current_date|current_time|current_timestamp|localtimestamp)",
+        "flags": "i"
+      }
+    },
+    "identifier": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[A-Za-z_À-￿][A-Za-z0-9_$À-￿]*"
+      }
+    },
+    "operator": {
+      "type": "TOKEN",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "[<>=!~]+"
+          },
+          {
+            "type": "STRING",
+            "value": "->"
+          },
+          {
+            "type": "STRING",
+            "value": "->>"
+          },
+          {
+            "type": "STRING",
+            "value": "#>"
+          },
+          {
+            "type": "STRING",
+            "value": "#>>"
+          },
+          {
+            "type": "STRING",
+            "value": "@>"
+          },
+          {
+            "type": "STRING",
+            "value": "<@"
+          },
+          {
+            "type": "STRING",
+            "value": "?"
+          },
+          {
+            "type": "STRING",
+            "value": "::"
+          },
+          {
+            "type": "STRING",
+            "value": "||"
+          },
+          {
+            "type": "STRING",
+            "value": "+"
+          },
+          {
+            "type": "STRING",
+            "value": "-"
+          },
+          {
+            "type": "STRING",
+            "value": "*"
+          },
+          {
+            "type": "STRING",
+            "value": "/"
+          },
+          {
+            "type": "STRING",
+            "value": "%"
+          }
+        ]
+      }
+    },
+    "punctuation": {
+      "type": "TOKEN",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "STRING",
+            "value": ","
+          },
+          {
+            "type": "STRING",
+            "value": ";"
+          },
+          {
+            "type": "STRING",
+            "value": "("
+          },
+          {
+            "type": "STRING",
+            "value": ")"
+          },
+          {
+            "type": "STRING",
+            "value": "."
+          },
+          {
+            "type": "STRING",
+            "value": "["
+          },
+          {
+            "type": "STRING",
+            "value": "]"
+          }
+        ]
+      }
+    },
+    "other": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": -1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[^\\s]"
+        }
+      }
+    }
+  },
+  "extras": [
+    {
+      "type": "PATTERN",
+      "value": "\\s"
+    }
+  ],
+  "conflicts": [],
+  "precedences": [],
+  "externals": [],
+  "inline": [],
+  "supertypes": [],
+  "reserved": {}
+}

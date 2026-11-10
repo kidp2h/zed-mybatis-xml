@@ -1,0 +1,6 @@
+name = "MyBatis SQL"
+grammar = "mybatis_sql"
+path_suffixes = []
+hidden = true
+line_comments = ["-- "]
+block_comment = ["/* ", " */"]

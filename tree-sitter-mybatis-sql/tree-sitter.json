@@ -1,0 +1,16 @@
+{
+  "grammars": [
+    {
+      "name": "mybatis_sql",
+      "camelcase": "MybatisSql",
+      "scope": "source.mybatis_sql",
+      "path": ".",
+      "file-types": []
+    }
+  ],
+  "metadata": {
+    "version": "0.0.1",
+    "license": "MIT",
+    "description": "Token-level SQL grammar for MyBatis mapper fragments"
+  }
+}

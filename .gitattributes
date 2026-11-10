@@ -1,0 +1,4 @@
+# Normalize line endings to LF on every OS
+* text=auto eol=lf
+
+*.wasm binary
